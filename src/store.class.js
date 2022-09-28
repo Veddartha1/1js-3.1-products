@@ -17,10 +17,10 @@ class Store {
 
     loadData() {
         data.categories.forEach(category => {
-            this.addCategory(category);
+            this.categories.push(category);
         });
         data.products.forEach(product => {
-            this.addProduct(product);
+            this.products.push(product);
         });
     }
 

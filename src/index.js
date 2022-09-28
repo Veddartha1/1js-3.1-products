@@ -64,3 +64,6 @@ try {
 } catch (err) {
     console.error(err)
 }
+
+console.log(myStore.categories)
+console.log(myStore.products)
