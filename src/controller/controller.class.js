@@ -21,6 +21,7 @@ class Controller {
         try {
             const prod = this.store.addProduct(formData);
             this.view.renderProduct(prod);
+            this.view.renderTotalImport(this.store.totalImport());
         } catch(err) {
             this.view.renderMessage(err);
         }
@@ -41,6 +42,7 @@ class Controller {
             this.store.delProduct(id);
             id = 'producto ' + id;
             this.view.renderRemoveElementById(id);
+            this.view.renderTotalImport(this.store.totalImport());
         } catch(err) {
             this.view.renderMessage(err);
         }

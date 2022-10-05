@@ -9,8 +9,8 @@ class View {
         <td>${product.name}</td>
         <td>${product.category}</td>
         <td>${product.units}</td>
-        <td>${product.price} €/u</td>
-        <td>${product.productImport()}</td>
+        <td>${Number(product.price).toFixed(2)} €/u</td>
+        <td>${Number(product.productImport()).toFixed(2)} €</td>
         <td></td>`;
         
         const tbodyUI = document.querySelector('#table-body');
@@ -25,7 +25,7 @@ class View {
 
     renderTotalImport(totalImport) {
         const impTotalUI = document.getElementById('importe-total');
-        impTotalUI.textContent = totalImport + ' €';
+        impTotalUI.textContent = Number(totalImport).toFixed(2) + ' €';
     }
 
     renderCategoryList(category) {
