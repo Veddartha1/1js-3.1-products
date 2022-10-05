@@ -17,15 +17,15 @@ class Store {
 
     loadData() {
         data.categories.forEach(category => {
-            this.categories.push(category);
+            this.categories.push(new Category(category.id, category.name, category.description));
         });
         data.products.forEach(product => {
-            this.products.push(product);
+            this.products.push(new Product(product.id, product.name, product.category, product.price, product.units));
         });
     }
 
     getCategoryById(id) {
-        let category = this.categories.find(category => category.id === id);
+        let category = this.categories.find(category => category.id === Number(id));
         if (!category) {
             throw "No se encuentra ninguna cagegoría con id " + id;
         }
@@ -41,7 +41,7 @@ class Store {
     }
 
     getProductById(id) {
-        let product = this.products.find(croduct => croduct.id === id);
+        let product = this.products.find(croduct => croduct.id === Number(id));
         if (!product) {
             throw "No se encuentra ningún producto con id " + id;
         }
@@ -49,7 +49,7 @@ class Store {
     }
 
     getProductsByCategory(id) {
-        let products = this.products.filter(product => product.category === id);
+        let products = this.products.filter(product => product.category === Number(id));
         return products;
     }
 
@@ -81,8 +81,8 @@ class Store {
         if (product.price < 0) {
             throw "El precio es inferior a 0";
         }
-        if (product.units && (!Number.isInteger(product.units) || isNaN(product.units))) {
-            throw "La unidades tienen un formato";
+        if (product.units && (!Number.isInteger(Number(product.units)) || isNaN(product.units))) {
+            throw "La unidades tienen un formato incorrecto";
         }
         if (product.units < 0) {
             throw "Las unidades son inferior a 0";
@@ -103,7 +103,7 @@ class Store {
         if (this.getProductsByCategory(id).length > 0) {
             throw "La categoría contiene productos";     
         } else {
-            let catIndex = this.categories.findIndex(category => category.id === id);
+            let catIndex = this.categories.findIndex(category => category.id === Number(id));
             this.categories.splice(catIndex,1);
             return category;
         }  
@@ -114,13 +114,13 @@ class Store {
         if (producto.units > 0) {
             throw "El producto todavía tiene unidades"; 
         }
-        let productIndex = this.products.findIndex(product => product.id === id);
+        let productIndex = this.products.findIndex(product => product.id === Number(id));
         this.products.splice(productIndex, 1);
         return producto;
     }
 
     totalImport() {
-        return this.products.reduce((total, product) => total += product.producImport(), 0);
+        return this.products.reduce((total, product) => total += product.productImport(), 0);
     }
 
     orderByUnitsDesc() {
