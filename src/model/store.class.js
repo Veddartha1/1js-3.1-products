@@ -25,7 +25,7 @@ class Store {
     }
 
     getCategoryById(id) {
-        let category = this.categories.find(category => category.id == id);
+        let category = this.categories.find(category => category.id === Number(id));
         if (!category) {
             throw "No se encuentra ninguna cagegoría con id " + id;
         }
@@ -41,7 +41,7 @@ class Store {
     }
 
     getProductById(id) {
-        let product = this.products.find(croduct => croduct.id == id);
+        let product = this.products.find(croduct => croduct.id === Number(id));
         if (!product) {
             throw "No se encuentra ningún producto con id " + id;
         }
@@ -49,7 +49,7 @@ class Store {
     }
 
     getProductsByCategory(id) {
-        let products = this.products.filter(product => product.category == id);
+        let products = this.products.filter(product => product.category === Number(id));
         return products;
     }
 
@@ -103,7 +103,7 @@ class Store {
         if (this.getProductsByCategory(id).length > 0) {
             throw "La categoría contiene productos";     
         } else {
-            let catIndex = this.categories.findIndex(category => category.id == id);
+            let catIndex = this.categories.findIndex(category => category.id === Number(id));
             this.categories.splice(catIndex,1);
             return category;
         }  
@@ -114,7 +114,7 @@ class Store {
         if (producto.units > 0) {
             throw "El producto todavía tiene unidades"; 
         }
-        let productIndex = this.products.findIndex(product => product.id == id);
+        let productIndex = this.products.findIndex(product => product.id === Number(id));
         this.products.splice(productIndex, 1);
         return producto;
     }
