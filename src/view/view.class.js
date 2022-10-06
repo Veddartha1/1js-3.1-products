@@ -38,12 +38,12 @@ class View {
     }
     
     renderMessage(msj) {
-        const divErrorUI = document.getElementById('messages');
-        divErrorUI.innerHTML = `<div class="alert alert-danger alert-dismissible" role="alert">
-        ${msj}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove()">
-        </button>
-        </div>`
+        const errorUI = document.createElement('div');
+        errorUI.className = 'alert alert-danger alert-dismissible';
+        errorUI.role = 'alert';
+        errorUI.innerText = msj;
+        const divErrorUI = document.getElementById('messages').appendChild(errorUI);
+        setTimeout(() => divErrorUI.remove(errorUI), 3000);
     }
 }
 
