@@ -141,11 +141,35 @@ class Store {
         });
     }
 
+    aumentarProducto(id) {
+        let unidades = this.getProductById(id).units;
+        unidades = Number(unidades) + 1;
+        this.getProductById(id).setUnits(unidades);
+    }
+
+    reducirProducto(id) {
+        let unidades = this.getProductById(id).units;
+        unidades = Number(unidades) - 1;
+        if (unidades < 0) {
+            throw "Las unidades no pueden ser menores a 0";
+        }
+        this.getProductById(id).setUnits(unidades);
+    }
+
     toString() {
         let cabecera = 'Almacén ' + this.id + ' => ' + this.products.length +
         ' productos: ' + this.totalImport.toFixed(2) + ' €\n';
         let productos = this.products.map(product => '- ' + product);
         return  cabecera + productos;
+    }
+
+    editProduct(id, name, price, category, units) {
+        let product = this.getProductById(id);
+        product.setName(name);
+        product.setPrice(price);
+        product.setCategory(category);
+        product.setUnits(units);
+        return product;
     }
 
 }
