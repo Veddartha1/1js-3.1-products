@@ -11,9 +11,41 @@ class Controller {
 
     init(){
         this.store.loadData();
-        this.store.products.forEach(product => this.view.renderProduct(product));
+        this.store.products.forEach(product => {
+            this.view.renderProduct(product);
+            this.addButtonListener(product.id)
+        });
         this.view.renderTotalImport(this.store.totalImport());
         this.store.categories.forEach(category => this.view.renderCategoryList(category));
+    }
+
+    addButtonListener(productId) {
+        const prod = this.store.getProductById(productId);
+
+        document.querySelector('#producto-' + productId + ' .aumentar').addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            this.store.aumentarProducto(productId);
+            this.view.renderUpdatedProduct(prod);
+            this.view.renderTotalImport(this.store.totalImport());
+        });
+        document.querySelector('#producto-' + productId + ' .reducir').addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            this.store.reducirProducto(productId);
+            this.view.renderUpdatedProduct(prod);
+            this.view.renderTotalImport(this.store.totalImport());
+        });
+        document.querySelector('#producto-' + productId + ' .editar').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.view.renderEditProduct(prod);
+
+        });
+        
+        document.querySelector('#producto-' + productId + ' .borrar').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.deleteProductFromStore(productId);
+        });
     }
 
     addProductToStore(formData) {
@@ -21,6 +53,7 @@ class Controller {
         try {
             const prod = this.store.addProduct(formData);
             this.view.renderProduct(prod);
+            this.addButtonListener(prod.id);
             this.view.renderTotalImport(this.store.totalImport());
         } catch(err) {
             this.view.renderMessage(err);
@@ -37,10 +70,10 @@ class Controller {
         }
     }
 
-    deleteProductFromStore(id) {
+     deleteProductFromStore(id) {
         try {
             this.store.delProduct(id);
-            id = 'producto ' + id;
+            id = 'producto-' + id;
             this.view.renderRemoveElementById(id);
             this.view.renderTotalImport(this.store.totalImport());
         } catch(err) {
@@ -49,7 +82,7 @@ class Controller {
     }
 
     deleteCategoryFromStore(id) {
-try {
+        try {
             this.store.delCategory(id);
             id = 'categoria ' + id;
             this.view.renderRemoveElementById(id);
@@ -57,6 +90,17 @@ try {
             this.view.renderMessage(err);
         }
     }
+
+    editProductFromStore(formData) {
+        try {
+            let prod = this.store.editProduct(formData.id, formData.name, formData.price, formData.category, formData.units);
+            this.view.renderUpdatedProduct(prod);
+            this.view.renderTotalImport(this.store.totalImport());
+        } catch(err) {
+            this.view.renderMessage(err);
+        }
+    }
+
 }
 
 module.exports = Controller;
