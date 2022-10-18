@@ -75,6 +75,15 @@ class View {
         optionUI.value = category.id;
         const selectUI = document.getElementById('newprod-cat');
         selectUI.appendChild(optionUI);
+
+        const catUI = document.createElement('tr');
+        catUI.id = 'categoria-' + category.id;
+        catUI.innerHTML = `
+        <td>${category.id}</td>
+        <td>${category.name}</td>
+        <td>${category.description}</td>`;
+        const tbodyUI = document.querySelector('#cat-table-body');
+        tbodyUI.appendChild(catUI);
     }
 
     renderEditProduct(product) {
@@ -101,6 +110,7 @@ class View {
         const divErrorUI = document.getElementById('messages').appendChild(errorUI);
         setTimeout(() => divErrorUI.remove(errorUI), 3000);
     }
+
 }
 
 module.exports = View;

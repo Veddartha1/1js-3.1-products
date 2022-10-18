@@ -17,6 +17,7 @@ class Controller {
         });
         this.view.renderTotalImport(this.store.totalImport());
         this.store.categories.forEach(category => this.view.renderCategoryList(category));
+        this.showSection('almacen');
     }
 
     addButtonListener(productId) {
@@ -99,6 +100,21 @@ class Controller {
         } catch(err) {
             this.view.renderMessage(err);
         }
+    }
+
+    showSection(section) {
+        this.hideAllSections();
+        document.getElementById(section).classList.remove('oculto');
+    }
+
+    hideAllSections() {
+        document.getElementById('almacen').classList.add('oculto');
+        document.getElementById('new-cat').classList.add('oculto');
+        document.getElementById('del-cat').classList.add('oculto');
+        document.getElementById('new-prod').classList.add('oculto');
+        document.getElementById('almacen').classList.add('oculto');
+        document.getElementById('categorias').classList.add('oculto');
+        document.getElementById('about').classList.add('oculto');
     }
 
 }

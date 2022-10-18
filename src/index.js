@@ -55,4 +55,21 @@ window.addEventListener('load', () => {
     myController.deleteCategoryFromStore(document.getElementById('delcat-id').value)      
   })
 
+  document.getElementById('pagina-prod').addEventListener('click', (event) => {
+    myController.showSection('almacen')
+  })
+  document.getElementById('pagina-cat').addEventListener('click', (event) => {
+    myController.showSection('categorias')
+  })
+  document.getElementById('pagina-add-prod').addEventListener('click', (event) => {
+    myController.showSection('new-prod')
+
+  })
+  document.getElementById('pagina-add-cat').addEventListener('click', (event) => {
+    myController.showSection('new-cat')
+  })
+  document.getElementById('pagina-about').addEventListener('click', (event) => {
+    myController.showSection('about')
+  })
+
 })
