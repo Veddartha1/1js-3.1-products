@@ -52,6 +52,10 @@ class Product {
         return this.units;
     }
 
+    getName() {
+        return this.name;
+    }
+
 }
 
 module.exports = Product

@@ -87,7 +87,7 @@
 		<!-- Acciones sobre el almacén -->
 		<div class="row">
 			<div class="col-12">
-				<form id="new-prod">
+				<form id="new-prod" novalidate>
 					<fieldset>
 						<legend class="bg-dark text-white text-center">Añadir producto</legend>
 						<!-- Aquí los inputs y botones del form -->
@@ -97,24 +97,28 @@
 						</div>
 						<div class="form-group">
 							<label for="newprod-name">Nombre:</label>
-							<input type="text" id="newprod-name" name="newprod-name" class="form-control" required>
+							<input type="text" minlength="5" maxlength="50" id="newprod-name" name="newprod-name" class="form-control" required>
+							<span class="error"></span>
 						</div>
 						<div class="form-group">
 							<label for="newprod-cat">Categoría:</label>
 							<select class="form-control" id="newprod-cat" name="newprod-cat" required>
 								<option value="">--- Selecciona categoría ---</option>
 							</select>
+							<span class="error"></span>
 						</div>
 
 						<div class="form-group">
 							<label for="newprod-units">Unidades.:</label>
-							<input type="text" inputmode="numeric" pattern="\d*" class="form-control" id="newprod-units"
+							<input type="number" max="100" min="0" class="form-control" id="newprod-units"
 								name="newprod-units">
+							<span class="error"></span>
 						</div>
 						<div class="form-group">
 							<label for="newprod-price">Precio/u.:</label>
-							<input type="text" inputmode="numeric" pattern="^\d+(\.+\d+)?" id="newprod-price"
+							<input type="text" inputmode="numeric" pattern="^\d+(\.+\d{1,2})?" id="newprod-price"
 								name="newprod-price" class="form-control" placeholder="Ej: 5.35" required>
+							<span class="error"></span>
 						</div>
 						<br>
 						<button type="submit" id="add-prod" class="btn btn-default btn-dark">Añadir</button>
@@ -123,7 +127,7 @@
 				</form>
 			</div>
 			<div class="col-12">
-				<form id="new-cat">
+				<form id="new-cat" novalidate>
 					<fieldset>
 						<legend class="bg-dark text-white text-center">Añadir categoría</legend>
 						<!-- Aquí los inputs y botones del form -->
@@ -149,7 +153,7 @@
 			</div>
 			<div class="col-sm-6 col-md-4 col-lg-4">
 				<br>
-				<form id="del-cat">
+				<form id="del-cat" novalidate>
 					<fieldset>
 						<legend class="bg-dark text-white text-center">Eliminar categoría</legend>
 						<!-- Aquí los inputs y botones del form -->
