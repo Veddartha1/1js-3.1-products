@@ -9,8 +9,8 @@ class Controller {
         this.view = new View()
     }
 
-    init(){
-        this.store.loadData()
+    async init(){
+        await this.store.loadData()
         this.store.products.forEach(product => {
             this.view.renderProduct(product)
             this.addButtonListener(product.id)
@@ -22,75 +22,72 @@ class Controller {
     }
 
     addListeners() {
+        document.getElementById('new-prod').addEventListener('submit', (event) => {
 
-        window.addEventListener('load', () => {
+            event.preventDefault()
 
-            document.getElementById('new-prod').addEventListener('submit', (event) => {
+            const id = document.getElementById('newprod-id').value
+            const name = document.getElementById('newprod-name').value
+            const price = document.getElementById('newprod-price').value
+            const category = document.getElementById('newprod-cat').value
+            const units = document.getElementById('newprod-units').value
 
-                event.preventDefault()
-
-                const id = document.getElementById('newprod-id').value
-                const name = document.getElementById('newprod-name').value
-                const price = document.getElementById('newprod-price').value
-                const category = document.getElementById('newprod-cat').value
-                const units = document.getElementById('newprod-units').value
-
-                if (id) {
-                    this.editProductFromStore({ id, name, price, category, units })   
-                } else {
-                    this.validateName.bind(this)()
-                    this.validateCat()
-                    this.validateUnits()
-                    this.validatePrice()
-                    this.addProductToStore({ name, price, category, units })   
-                }
-            })
-          
-            document.getElementById('new-cat').addEventListener('submit', (event) => {
-                event.preventDefault()
-            
-                const name = document.getElementById('newcat-name').value
-                const description = document.getElementById('newcat-description').value
-            
-                this.addCategoryToStore({ name, description })   
-          
-            })
-          
-            document.getElementById('del-cat').addEventListener('submit', (event) => {
-                event.preventDefault()
-            
-                this.deleteCategoryFromStore(document.getElementById('delcat-id').value)      
-            })
-          
-            document.getElementById('pagina-prod').addEventListener('click', (event) => {
-                this.showSection('almacen')
-            })
-          
-            document.getElementById('pagina-cat').addEventListener('click', (event) => {
-                this.showSection('categorias')
-            })
-          
-            document.getElementById('pagina-add-prod').addEventListener('click', (event) => {
-                this.showSection('new-prod')
-            })
-          
-            document.getElementById('pagina-add-cat').addEventListener('click', (event) => {
-                this.showSection('new-cat')
-            })
-            
-            document.getElementById('pagina-about').addEventListener('click', (event) => {
-                this.showSection('about')
-            })
-
-            document.getElementById('newprod-name').addEventListener('blur', this.validateName.bind(this))
-
-            document.getElementById('newprod-cat').addEventListener('blur', this.validateCat)
-
-            document.getElementById('newprod-units').addEventListener('blur', this.validateUnits)
-
-            document.getElementById('newprod-price').addEventListener('blur', this.validatePrice)
-          
+            if (id) {
+                this.editProductFromStore({ id, name, price, category, units })
+            } else {
+                this.validateName.bind(this)()
+                this.validateCat()
+                this.validateUnits()
+                this.validatePrice()
+                this.addProductToStore({ name, price, category, units })
+            }
         })
+          
+        document.getElementById('new-cat').addEventListener('submit', (event) => {
+            event.preventDefault()
+        
+            const name = document.getElementById('newcat-name').value
+            const description = document.getElementById('newcat-description').value
+            this.addCategoryToStore({ name, description })
+        })
+        
+        document.getElementById('del-cat').addEventListener('submit', async (event) => {
+            event.preventDefault()
+            const catId = document.getElementById('delcat-id').value
+            this.deleteCategoryFromStore(catId)        
+        })
+        
+        document.getElementById('pagina-prod').addEventListener('click', (event) => {
+            this.showSection('almacen')
+        })
+        
+        document.getElementById('pagina-cat').addEventListener('click', (event) => {
+            this.showSection('categorias')
+        })
+        
+        document.getElementById('pagina-add-prod').addEventListener('click', (event) => {
+            this.showSection('new-prod')
+        })
+        
+        document.getElementById('pagina-add-cat').addEventListener('click', (event) => {
+            this.showSection('new-cat')
+        })
+
+        document.getElementById('pagina-del-cat').addEventListener('click', (event) => {
+            this.showSection('del-cat')
+        })
+        
+        document.getElementById('pagina-about').addEventListener('click', (event) => {
+            this.showSection('about')
+        })
+
+        document.getElementById('newprod-name').addEventListener('blur', this.validateName.bind(this))
+
+        document.getElementById('newprod-cat').addEventListener('blur', this.validateCat)
+
+        document.getElementById('newprod-units').addEventListener('blur', this.validateUnits)
+
+        document.getElementById('newprod-price').addEventListener('blur', this.validatePrice)
     }
 
     validateName() {
@@ -166,13 +163,14 @@ class Controller {
         });
     }
 
-    addProductToStore(formData) {
+    async addProductToStore(payload) {
         if (document.getElementById('new-prod').checkValidity()) {
             try {
-                const prod = this.store.addProduct(formData);
+                const prod = await this.store.addProduct(payload);
                 this.view.renderProduct(prod);
                 this.addButtonListener(prod.id);
                 this.view.renderTotalImport(this.store.totalImport());
+                this.showSection('almacen')
             } catch(err) {
                 this.view.renderMessage(err);
             }
@@ -180,43 +178,49 @@ class Controller {
         
     }
     
-    addCategoryToStore(formData){
+    async addCategoryToStore(payload){
         try {
-            const newCat = this.store.addCategory(formData.name, formData.description);
+            const newCat = await this.store.addCategory(payload);
             this.view.renderCategoryList(newCat);
+            this.showSection('categorias')
         } catch(err) {
             this.view.renderMessage(err);
         }
     }
 
-     deleteProductFromStore(id) {
+    async deleteProductFromStore(id) {
         try {
-            this.store.delProduct(id);
+            await this.store.delProduct(id);
             id = 'producto-' + id;
             this.view.renderRemoveElementById(id);
             this.view.renderTotalImport(this.store.totalImport());
+            this.showSection('almacen')
         } catch(err) {
             this.view.renderMessage(err);
         }
     }
 
-    deleteCategoryFromStore(id) {
+    async deleteCategoryFromStore(id) {
         try {
-            this.store.delCategory(id);
-            id = 'categoria ' + id;
+            await this.store.delCategory(id);
+            id = 'categoria-' + id;
             this.view.renderRemoveElementById(id);
+            this.showSection('categorias')
         } catch(err) {
             this.view.renderMessage(err);
         }
     }
 
-    editProductFromStore(formData) {
-        try {
-            let prod = this.store.editProduct(formData.id, formData.name, formData.price, formData.category, formData.units);
-            this.view.renderUpdatedProduct(prod);
-            this.view.renderTotalImport(this.store.totalImport());
-        } catch(err) {
-            this.view.renderMessage(err);
+    async editProductFromStore(payload) {
+        if (document.getElementById('new-prod').checkValidity()) {
+            try { 
+                let prod = await this.store.editProduct(payload);
+                this.view.renderUpdatedProduct(prod);
+                this.view.renderTotalImport(this.store.totalImport());
+                this.showSection('almacen')
+            } catch(err) {
+                this.view.renderMessage(err);
+            }   
         }
     }
 
