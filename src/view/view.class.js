@@ -68,20 +68,20 @@ class View {
         impTotalUI.textContent = Number(totalImport).toFixed(2) + ' €';
     }
 
-    renderCategoryList(category) {
+    renderCategoryList(payload) {
         const optionUI = document.createElement('option');
-        optionUI.id = 'categoria ' + category.id;
-        optionUI.innerHTML = category.name;
-        optionUI.value = category.id;
+        optionUI.id = 'categoria ' + payload.id;
+        optionUI.innerHTML = payload.name;
+        optionUI.value = payload.id;
         const selectUI = document.getElementById('newprod-cat');
         selectUI.appendChild(optionUI);
 
         const catUI = document.createElement('tr');
-        catUI.id = 'categoria-' + category.id;
+        catUI.id = 'categoria-' + payload.id;
         catUI.innerHTML = `
-        <td>${category.id}</td>
-        <td>${category.name}</td>
-        <td>${category.description}</td>`;
+        <td>${payload.id}</td>
+        <td>${payload.name}</td>
+        <td>${payload.description}</td>`;
         const tbodyUI = document.querySelector('#cat-table-body');
         tbodyUI.appendChild(catUI);
     }

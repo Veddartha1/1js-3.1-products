@@ -1,0 +1,28 @@
+{
+    "remotePath": "./public_html/exercici5",
+    "host": "files.000webhost.com",
+    "username": "ruben-sergi",
+    "password": "12345678",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store",
+        "/node_modules/*"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ".css, .js, .html, .json"
+        ],
+        "path": ""
+    }
+}

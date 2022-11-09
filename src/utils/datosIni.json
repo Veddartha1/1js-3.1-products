@@ -1,0 +1,183 @@
+{
+  "categories": [
+    {
+      "name": "cat",
+      "description": "cat",
+      "id": 1
+    },
+    {
+      "name": "cat",
+      "description": "cat",
+      "id": 2
+    },
+    {
+      "name": "tecat",
+      "description": "testdesc",
+      "id": 3
+    },
+    {
+      "name": "tecat",
+      "description": "testdesc",
+      "id": 4
+    },
+    {
+      "name": "test cat 2",
+      "description": "testdesc",
+      "id": 5
+    },
+    {
+      "name": "test cat 2",
+      "description": "testdesc",
+      "id": 6
+    },
+    {
+      "name": "test cat 2ewqeq",
+      "description": "ewewqewq",
+      "id": 7
+    },
+    {
+      "name": "test cat 2ewqeq",
+      "description": "ewewqewq",
+      "id": 8
+    },
+    {
+      "name": "pruebacat",
+      "description": "eewqewqeqwewqewq",
+      "id": 9
+    },
+    {
+      "name": "pruebacat",
+      "description": "eewqewqeqwewqewq",
+      "id": 10
+    },
+    {
+      "name": "test cat 2a",
+      "description": "cat",
+      "id": 11
+    },
+    {
+      "name": "tecatddsd",
+      "description": "testdesc",
+      "id": 12
+    },
+    {
+      "name": "tecatddsd",
+      "description": "testdesc",
+      "id": 13
+    },
+    {
+      "name": "test cat 2we",
+      "description": "testdesc",
+      "id": 14
+    },
+    {
+      "name": "ytytrytryty",
+      "description": "ytrytrytr",
+      "id": 15
+    },
+    {
+      "name": "test cat",
+      "description": "testdesc",
+      "id": 16
+    },
+    {
+      "name": "test cat",
+      "description": "testdesc",
+      "id": 17
+    },
+    {
+      "name": "catewqewqeq",
+      "description": "testdesc",
+      "id": 18
+    },
+    {
+      "name": "test cat 2rewrew",
+      "description": "rwe",
+      "id": 19
+    },
+    {
+      "name": "test cat 2rewrew",
+      "description": "rwe",
+      "id": 20
+    },
+    {
+      "name": "test cat 2rewrewrewrew",
+      "description": "rwe",
+      "id": 21
+    },
+    {
+      "name": "ewqeqwewqqwe",
+      "description": "eqwewq",
+      "id": 22
+    },
+    {
+      "name": "ewqeqwewqqwe",
+      "description": "eqwewq",
+      "id": 23
+    },
+    {
+      "id": 24,
+      "name": "test cat 2eeee",
+      "description": "qewqewq"
+    },
+    {
+      "name": "rewrewrewrew",
+      "description": "rewrewrew",
+      "id": 25
+    },
+    {
+      "name": "fewfewfewfewget",
+      "description": "gewgewgew",
+      "id": 26
+    },
+    {
+      "name": "ddsdsadsadsa",
+      "description": "dsadsadas",
+      "id": 27
+    }
+  ],
+  "products": [
+    {
+      "name": "test12",
+      "price": "12",
+      "category": "1",
+      "units": "5",
+      "id": 2
+    },
+    {
+      "name": "test45",
+      "price": "12",
+      "category": "1",
+      "units": "12",
+      "id": 3
+    },
+    {
+      "name": "test45",
+      "price": "12",
+      "category": "1",
+      "units": "12",
+      "id": 4
+    },
+    {
+      "name": "Silla de ordenador45",
+      "price": "12",
+      "category": "1",
+      "units": "12",
+      "id": 5
+    },
+    {
+      "name": "Silla de ordenador453",
+      "price": "12",
+      "category": "1",
+      "units": "12",
+      "id": 6
+    },
+    {
+      "name": "Silla de ordenador3312",
+      "price": "12",
+      "category": "1",
+      "units": "12",
+      "id": 7
+    }
+  ]
+}
